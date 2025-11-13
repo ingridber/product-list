@@ -19,6 +19,11 @@ body {
   margin: 0 auto;
 }
 
+.product-card.hide-card {
+  display: none;
+}
+
+/* Areas (placering) */
 .header {
   justify-self: center;  /* centrar elementet i griden */
   text-align: center;    /* centrar texten i elementet */
