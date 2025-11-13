@@ -1,0 +1,56 @@
+/* Layout */
+.fake-store {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(10, minmax(60px, auto));
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  min-height: 100vh;
+  padding: 12px;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+}
+
+/* Areas (placering) */
+.header {
+  grid-area: 2 / 3 / 3 / 11;
+}
+
+.search {
+  grid-area: 3 / 4 / 5 / 10;
+}
+
+.product-list {
+  grid-area: 5 / 3 / 11 / 11;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Färger för att se rutorna tydligt */
+.header {
+  background-color: #ffe4c7;
+  border: 2px dashed #d97706;
+  padding: 16px;
+}
+
+.search {
+  background-color: #dbeafe;
+  border: 2px dashed #2563eb;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.product-list {
+  background-color: #dcfce7;
+  border: 2px dashed #16a34a;
+  padding: 12px;
+}
+
+/* Exempel-stil för framtida kort i product-list */
+.product-list > * {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+}
