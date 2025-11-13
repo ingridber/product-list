@@ -1,56 +1,115 @@
-/* Layout */
+/* Bas */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f5f5f5;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Sidlayout (valfritt) */
 .fake-store {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(10, minmax(60px, auto));
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
-  min-height: 100vh;
-  padding: 12px;
-  box-sizing: border-box;
-  background-color: #f5f5f5;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Areas (placering) */
 .header {
-  grid-area: 2 / 3 / 3 / 11;
+  justify-self: center;  /* centrar elementet i griden */
+  text-align: center;    /* centrar texten i elementet */
+  margin: 0;
 }
+
 
 .search {
-  grid-area: 3 / 4 / 5 / 10;
-}
-
-.product-list {
-  grid-area: 5 / 3 / 11 / 11;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-/* Färger för att se rutorna tydligt */
-.header {
-  background-color: #ffe4c7;
-  border: 2px dashed #d97706;
-  padding: 16px;
-}
-
-.search {
-  background-color: #dbeafe;
-  border: 2px dashed #2563eb;
-  padding: 12px;
-  font-size: 1rem;
-}
-
-.product-list {
-  background-color: #dcfce7;
-  border: 2px dashed #16a34a;
-  padding: 12px;
-}
-
-/* Exempel-stil för framtida kort i product-list */
-.product-list > * {
-  background-color: #ffffff;
+  padding: 8px 10px;     
+  font-size: 0.9rem;      
   border: 1px solid #e5e7eb;
-  padding: 12px;
   border-radius: 8px;
+  width: 100%;
+  max-width: 460px;   
+  justify-self: center;  
+}
+
+
+/* Produktlistan: auto-wrap i grid – korten stannar i containern */
+.product-list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  align-items: start;
+}
+
+/* Kort */
+.product-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0; /* viktigt för att inte trycka ut griden */
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+}
+
+/* Bild */
+.product-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;     /* jämn höjd i griden */
+  object-fit: contain;      /* hela bilden syns */
+  display: block;
+  background: #eef2ff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Text */
+.product-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 6px 0 4px 0;
+
+  /* hindra overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-price {
+  margin: 0;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* Extra skydd mot overflow i alla element */
+.product-card > * {
+  min-width: 0;
+  word-break: break-word;
+}
+/* Lägg label före priset */
+.product-price::before {
+  content: "Price: ";
+  color: #64748b;      
+  font-weight: 600;
+  margin-right: 4px;
+}
+.product-card .product-title,
+.product-card .product-price {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
