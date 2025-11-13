@@ -38,3 +38,38 @@ export function productCard(product) {
     productList.appendChild(productItem);
 
 };
+
+export function searchProducts(searchInput) {
+
+    const productList = document.getElementById('product-list');
+    let cards = productList.querySelectorAll(".product-card");
+
+    for (let card of cards) {
+        let title = card.querySelector(".product-title")
+        if (!title.textContent.toLowerCase().includes(searchInput.toLowerCase())) {
+            card.classList.add("hide-card");
+        }
+    }
+
+    const clearFilterButton = document.createElement("button");
+    clearFilterButton.classList.add("clear-filter-button");
+    clearFilterButton.textContent = "Clear Filter";
+    clearFilterButton.addEventListener('click', showAllProducts);
+
+    const inputBox = document.querySelector(".input-div");
+    inputBox.appendChild(clearFilterButton);
+}
+
+function showAllProducts() {
+
+    const productList = document.getElementById('product-list');
+    let cards = productList.querySelectorAll(".product-card");
+
+    for (let card of cards) {
+        card.classList.remove("hide-card");
+    }
+
+    const inputBox = document.querySelector(".input-div");
+    const filterButton = inputBox.querySelector("button");
+    inputBox.removeChild(filterButton)
+}
