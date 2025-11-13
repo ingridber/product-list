@@ -5,39 +5,79 @@ export async function extractProduct() {
     let data = await getProducts();
 
     for (let item of data) {
-        productCard(item);
+        let card = new ProductCard(item);
     };
 
 };
 
+class ProductCard {
 
-export function productCard(product) {
+    constructor(product) {
+        this.productList = document.getElementById('product-list');
+        this.productCard = document.createElement('div');
+        this.productCard.classList.add('product-card');
+        this.productList.appendChild(this.productCard);
 
-    let productItem = document.createElement('div');
-    productItem.classList.add('product-card');
+        this.img = product.image,
+        this.title = product.title,
+        this.price = product.price,
+        this.category = product.category,
+        this.description = product.description,
 
+        this.active = false
 
-    let img = document.createElement('img');
-    img.classList.add('product-img');
-    img.src = product.image;
+        this.productCard.addEventListener('click', () => {
+            if (!this.active) {
+                this.productCard.replaceChildren("")
+                this.showProductCardInfo();
+                this.active = true;
+            } else {
+                this.productCard.replaceChildren("")
+                this.showProductCard();
+                this.active = false;
+            }
+        })
 
-    let title = document.createElement('h2');
-    title.classList.add('product-title')
-    title.textContent = product.title;
+        this.showProductCard();
+    }
 
-    let price = document.createElement('p');
-    price.classList.add('product-price');
-    price.textContent = product.price;
+    showProductCard() {
+        let img = document.createElement('img');
+        img.classList.add('product-img');
+        img.src = this.img;
+    
+        let title = document.createElement('h2');
+        title.classList.add('product-title')
+        title.textContent = this.title;
+    
+        let price = document.createElement('p');
+        price.classList.add('product-price');
+        price.textContent = this.price;
+    
+        this.productCard.appendChild(img);
+        this.productCard.appendChild(title);
+        this.productCard.appendChild(price);
+    };
 
-    productItem.appendChild(img);
-    productItem.appendChild(title);
-    productItem.appendChild(price);
+    showProductCardInfo() {
+        let title = document.createElement('h2');
+        title.classList.add('product-title');
+        title.textContent = this.title;
 
+        let category = document.createElement('h3');
+        category.classList.add('product-category');
+        category.textContent = this.category;
 
-    let productList = document.getElementById('product-list');
-    productList.appendChild(productItem);
+        let description = document.createElement('p');
+        description.classList.add('product-description');
+        description.textContent = this.description;
 
-};
+        this.productCard.appendChild(title);
+        this.productCard.appendChild(category);
+        this.productCard.appendChild(description);
+    }
+}
+
 
 export function searchProducts(searchInput) {
 
